@@ -3,7 +3,7 @@ import * as types from './mutation-type'
 
 export const ActionDoRegister = ({ dispatch }, payload) => {
   return services.register.create(payload).then(res => {
-    dispatch('ActionSetUser', res.data.user)
+    dispatch('ActionDoRegister', res.data.user)
   })
 }
 

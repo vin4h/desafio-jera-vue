@@ -6,12 +6,16 @@ Vue.use(VueResource)
 
 const http = Vue.http
 
-http.options.root = 'https://desafiojera.herokuapp.com/'
+http.options.root = 'http://localhost:3333/'
 
 Object.keys(services).map(service => {
   services[service] = Vue.resource('', {}, services[service])
 })
 
-export { http }
+const setBearerToken = token => {
+  http.defaults.headers.common.Authorization = `Bearer ${token}`
+}
+
+export { http, setBearerToken }
 
 export default services

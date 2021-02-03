@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="submit()">
+    <form @submit.prevent="submitLogin()">
       <div class="login-page">
           <div class="card">
             <div class="card-header">Login</div>
@@ -10,9 +10,9 @@
               <div class="form-group">
                 <input type="password" v-model="form.password" class="form-control" placeholder="Password" required/>
               </div>
-              <button class="btn btn-primary w-50">Entrar</button>
+              <button type="submit" class="btn btn-primary w-50">Entrar</button>
               <router-link to="/register">
-                <button type="button" class="btn btn-success w-50 mr-30">Cadastrar</button>
+                <button type="button" class="btn btn-danger w-50 mr-30">Cadastrar</button>
               </router-link>
             </div>
           </div>
@@ -25,7 +25,7 @@ import { mapActions } from 'vuex'
 
 export default {
   data: () => ({
-    form: {
+    formLogin: {
       email: '',
       password: ''
     },
@@ -33,14 +33,12 @@ export default {
   }),
   methods: {
     ...mapActions('auth', ['ActionDoLogin']),
-    async submit () {
+    async submitLogin () {
       try {
-        await this.ActionDoLogin(this.form)
-
-        this.$router.push({ name: 'dashboard' })
+        await this.ActionDoLogin(this.formLogin)
+        this.$route.push({ name: 'dashboard' })
       } catch (err) {
-        console.log(err.data)
-        alert(err.data ? err.data.error : 'Não Foi possível fazer Login')
+        console.log(err)
       }
     }
   }

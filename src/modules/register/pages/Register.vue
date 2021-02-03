@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="submit()">
+    <form @submit.prevent="submit">
       <div class="register-page">
             <div class="card">
               <div class="card-header">Register</div>
@@ -14,15 +14,15 @@
                   <input type="text" v-model="form.name" class="form-control" placeholder="Vinicius Freitas" required/>
                 </div>
                 <div class="form-group">
-                  <input type="date" v-model="form.birthDate" class="form-control" placeholder="26/12/1995" required/>
+                  <input type="date" v-model="form.birthday" class="form-control" placeholder="26/12/1995" required/>
                 </div>
                 <button class="btn btn-primary w-50">Registrar</button>
                 <router-link to="/">
-                  <button type="button" class="btn btn-success w-50 mr-30">Login</button>
+                  <button type="button" class="btn btn-danger w-50 mr-30">Login</button>
                 </router-link>
               </div>
               <div class="card-footer">
-                <v-facebook-login app-id="448197289708187" @sdk-init="handleSdkInit" @login="onLogin" @logout="onLogout" v-model="model"></v-facebook-login>
+                <v-facebook-login app-id="448197289708187" @sdk-init="handleSdkInit" @login="onLogin" @logout="onLogout"></v-facebook-login>
               </div>
             </div>
       </div>
@@ -39,15 +39,13 @@ export default {
       email: '',
       password: '',
       name: '',
-      birthDate: '',
+      birthday: '',
       facebook_id: null
     },
-    FB: {},
-    model: {},
-    scope: {}
+    FB: {}
   }),
   methods: {
-    ...mapActions('register', ['ActionDoRegister', 'ActionSetUser']),
+    ...mapActions('register', ['ActionDoRegister']),
     async submit () {
       try {
         await this.ActionDoRegister(this.form)
@@ -59,9 +57,8 @@ export default {
         alert(err.data ? err.data.error : 'Não Foi possível fazer seu cadastro')
       }
     },
-    handleSdkInit ({ FB, scope }) {
+    handleSdkInit ({ FB }) {
       this.FB = FB
-      this.scope = scope
     },
     async onLogin () {
       await this.FB.api('me', 'GET', { fields: 'id,name,email' },
@@ -69,13 +66,13 @@ export default {
           this.form.email = userInformation.email
           this.form.name = userInformation.name
           this.form.facebook_id = userInformation.id
-          this.form.birthDate = userInformation.birthday
         }
       )
     },
     onLogout () {
       this.form.email = ''
       this.form.name = ''
+      this.form.password = ''
       this.form.facebook_id = ''
       this.form.birthDate = ''
     }
