@@ -28,14 +28,20 @@ export default {
     form: {
       email: '',
       password: ''
-    }
+    },
+    messageError: [{}]
   }),
   methods: {
     ...mapActions('auth', ['ActionDoLogin']),
-    submit () {
-      this.ActionDoLogin(this.form).then(res => {
-        console.log(res.data)
-      })
+    async submit () {
+      try {
+        await this.ActionDoLogin(this.form)
+
+        this.$router.push({ name: 'dashboard' })
+      } catch (err) {
+        console.log(err.data)
+        alert(err.data ? err.data.error : 'Não Foi possível fazer Login')
+      }
     }
   }
 }
@@ -50,5 +56,9 @@ export default {
 }
 .card{
   width: 30%;
+}
+
+.alert{
+  display: none;
 }
 </style>

@@ -21,6 +21,9 @@
                   <button type="button" class="btn btn-success w-50 mr-30">Login</button>
                 </router-link>
               </div>
+              <div class="card-footer">
+                <v-facebook-login app-id="448197289708187" @sdk-init="handleSdkInit" @login="onLogin" @logout="onLogout" v-model="model"></v-facebook-login>
+              </div>
             </div>
       </div>
     </form>
@@ -28,6 +31,7 @@
 
 <script>
 import { mapActions } from 'vuex'
+import VFacebookLogin from 'vue-facebook-login-component'
 
 export default {
   data: () => ({
@@ -37,15 +41,47 @@ export default {
       name: '',
       birthDate: '',
       facebook_id: null
-    }
+    },
+    FB: {},
+    model: {},
+    scope: {}
   }),
   methods: {
-    ...mapActions('register', ['ActionDoRegister']),
-    submit () {
-      this.ActionDoRegister(this.form).then(res => {
-        console.log(res.data)
-      })
+    ...mapActions('register', ['ActionDoRegister', 'ActionSetUser']),
+    async submit () {
+      try {
+        await this.ActionDoRegister(this.form)
+
+        this.$router.push({ name: 'login' })
+
+        alert('Cadastrado com sucesso')
+      } catch (err) {
+        alert(err.data ? err.data.error : 'Não Foi possível fazer seu cadastro')
+      }
+    },
+    handleSdkInit ({ FB, scope }) {
+      this.FB = FB
+      this.scope = scope
+    },
+    async onLogin () {
+      await this.FB.api('me', 'GET', { fields: 'id,name,email' },
+        userInformation => {
+          this.form.email = userInformation.email
+          this.form.name = userInformation.name
+          this.form.facebook_id = userInformation.id
+          this.form.birthDate = userInformation.birthday
+        }
+      )
+    },
+    onLogout () {
+      this.form.email = ''
+      this.form.name = ''
+      this.form.facebook_id = ''
+      this.form.birthDate = ''
     }
+  },
+  components: {
+    VFacebookLogin
   }
 }
 </script>
@@ -59,5 +95,11 @@ export default {
 }
 .card{
   width: 30%;
+}
+
+.card-footer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
