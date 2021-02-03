@@ -21,6 +21,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   data: () => ({
     form: {
@@ -29,8 +31,11 @@ export default {
     }
   }),
   methods: {
+    ...mapActions('auth', ['ActionDoLogin']),
     submit () {
-      console.log(this.form)
+      this.ActionDoLogin(this.form).then(res => {
+        console.log(res.data)
+      })
     }
   }
 }
