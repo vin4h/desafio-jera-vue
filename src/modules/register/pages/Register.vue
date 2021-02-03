@@ -17,7 +17,7 @@
                   <input type="date" v-model="form.birthDate" class="form-control" placeholder="26/12/1995" required/>
                 </div>
                 <button class="btn btn-primary w-50">Registrar</button>
-                <router-link to="/login">
+                <router-link to="/">
                   <button type="button" class="btn btn-success w-50 mr-30">Login</button>
                 </router-link>
               </div>
@@ -40,7 +40,7 @@ export default {
     }
   }),
   methods: {
-    ...mapActions('create', ['ActionDoRegister']),
+    ...mapActions('register', ['ActionDoRegister']),
     submit () {
       this.ActionDoRegister(this.form).then(res => {
         console.log(res.data)
