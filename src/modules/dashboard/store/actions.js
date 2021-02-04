@@ -21,3 +21,9 @@ export const getWatched = ({ commit }, context, payload) => {
     commit(types.SET_WATCHED, res.data)
   })
 }
+
+export const createProfile = ({ dispatch }, context) => {
+  return services.dashboard.createProfile(context).then(res => {
+    dispatch('ActionFindUser', res.data)
+  })
+}

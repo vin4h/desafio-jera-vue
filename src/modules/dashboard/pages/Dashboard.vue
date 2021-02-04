@@ -1,7 +1,5 @@
 <template>
   <div class="dashboard">
-    <template>
-
       <div class="card card1">
         <div class="card-header">
           Olá {{ user.name }}
@@ -20,20 +18,22 @@
             </div>
           </div>
           <div class="card-footer">
-            <button class="btn btn-success w-30">Cadastrar</button>
+            <Modal />
             <router-link to="/">
               <button @click="logout" class="btn btn-danger w-30">Logout</button>
             </router-link>
           </div>
       </div>
-    </template>
   </div>
 </template>
-
 <script>
 import { mapState, mapActions } from 'vuex'
+import Modal from '../../../components/modal/Modal'
 
 export default {
+  data: () => ({
+    name: ''
+  }),
   methods: {
     ...mapActions('auth', ['ActionSignOut']),
     ...mapActions('dashboard', ['ActionFindUser', 'SetSelectProfileId']),
@@ -52,6 +52,9 @@ export default {
   },
   mounted () {
     this.load()
+  },
+  components: {
+    Modal
   }
 }
 </script>
@@ -62,6 +65,10 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.card-footer {
+  display: flex;
+  flex-direction: row;
 }
 
 .card1{

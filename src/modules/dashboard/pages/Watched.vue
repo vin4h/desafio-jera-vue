@@ -35,7 +35,7 @@
       </div>
     </div>
   <div class="card-footer">
-    <router-link to='/movies'>
+    <router-link to='/dashboardmovies'>
       <button class="btn btn-warning">Voltar</button>
     </router-link>
   </div>
