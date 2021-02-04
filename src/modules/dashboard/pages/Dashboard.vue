@@ -13,9 +13,9 @@
                 {{ profile.name }}
               </div>
               <div class="card-footer">
-                <route-link to="/movies">
-                  <button class="btn btn-primary">Acessar</button>
-                </route-link>
+                <router-link to="/dashboardmovies">
+                  <button class="btn btn-primary" @click="selectProfile(profile.id)">Acessar</button>
+                </router-link>
               </div>
             </div>
           </div>
@@ -34,17 +34,24 @@
 import { mapState, mapActions } from 'vuex'
 
 export default {
-  data: () => ({
-    profilesUser: []
-  }),
   methods: {
     ...mapActions('auth', ['ActionSignOut']),
+    ...mapActions('dashboard', ['ActionFindUser', 'SetSelectProfileId']),
     logout () {
       this.ActionSignOut()
+    },
+    load () {
+      this.ActionFindUser()
+    },
+    selectProfile (profileId) {
+      this.SetSelectProfileId(profileId)
     }
   },
   computed: {
-    ...mapState('auth', ['user'])
+    ...mapState('dashboard', ['user'])
+  },
+  mounted () {
+    this.load()
   }
 }
 </script>

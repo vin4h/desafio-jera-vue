@@ -1,5 +1,8 @@
 export default {
-  profiles: {
+  user: {
 
-  }
+  },
+  profile_id: '',
+  watched: [],
+  watchList: []
 }

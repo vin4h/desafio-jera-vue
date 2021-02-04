@@ -28,8 +28,7 @@ export default {
     form: {
       email: '',
       password: ''
-    },
-    messageError: [{}]
+    }
   }),
   methods: {
     ...mapActions('auth', ['ActionDoLogin']),

@@ -10,9 +10,35 @@ export const ActionDoLogin = ({ dispatch }, payload) => {
 }
 
 export const ActionCheckToken = ({ dispatch, state }) => {
+  if (state.token) {
+    return Promise.resolve(state.token)
+  }
+
   const token = storage.getLocalToken()
 
-  return dispatch('ActionSetToken', token)
+  if (!token) {
+    return Promise.reject(new Error('Token Inválido'))
+  }
+
+  dispatch('ActionSetToken', token)
+  return dispatch('ActionLoadSession')
+}
+
+export const ActionLoadSession = ({ dispatch }) => {
+  const load = async () => new Promise((resolve, reject) => {
+    try {
+      const { data: { user } } = services.auth.loadSession()
+      dispatch('ActionSetUser', user)
+      resolve()
+    } catch (err) {
+      dispatch('ActionSignOut')
+      reject(err)
+    }
+  })
+
+  const response = Promise.resolve(load)
+
+  return response
 }
 
 export const ActionSetUser = ({ commit }, payload) => {
