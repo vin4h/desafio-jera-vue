@@ -1,3 +1,3 @@
 export default {
-  create: { method: 'post', url: 'profiles' }
+  create: { method: 'post', url: 'users/find' }
 }

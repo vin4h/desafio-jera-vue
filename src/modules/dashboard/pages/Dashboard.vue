@@ -4,9 +4,10 @@
       <div class="card card1">
         <div class="card-header">
           <button class="btn btn-success w-30">Cadastrar</button>
+          <button @click="logout" class="btn btn-danger w-30">Logout</button>
         </div>
           <div class="card-body">
-            <div class="card card-profile">
+            <div class="card card-profile" v-if="profiles.length > 0">
               <div class="card-header">Perfil</div>
               <div class="card-body"></div>
               <div class="card-footer">
@@ -24,7 +25,14 @@
 
 <script>
 export default {
+  data: () => ({
+    profiles: []
+  }),
+  methods: {
+    logout () {
 
+    }
+  }
 }
 </script>
 

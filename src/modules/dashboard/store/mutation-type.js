@@ -1,1 +1,1 @@
-export const SET_USER = 'REGISTER/SET_USER'
+export const SET_PROFILE = 'DASHBOARD/SET_PROFILES'

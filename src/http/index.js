@@ -6,16 +6,15 @@ Vue.use(VueResource)
 
 const http = Vue.http
 
-http.options.root = 'http://localhost:3333/'
+http.options.root = 'http://localhost:3333/api/v1/'
 
 Object.keys(services).map(service => {
   services[service] = Vue.resource('', {}, services[service])
 })
 
 const setBearerToken = token => {
-  http.defaults.headers.common.Authorization = `Bearer ${token}`
+  http.headers.common.Authorization = `Bearer ${token}`
 }
 
-export { http, setBearerToken }
-
 export default services
+export { http, setBearerToken }
