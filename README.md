@@ -1,24 +1,29 @@
-# desafio-jera-vue
+<h1>Projeto vue Desafio Jera</h1>
 
-## Project setup
-```
-yarn install
-```
+## Primeiros comandos
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+instalar as dependencias do projeto após clonar
+    
+        yarn 
 
-### Compiles and minifies for production
-```
-yarn build
-```
+servidor rodando <a href="https://github.com/vin4h/DesafioJera">Projeto servidor</a>
 
-### Lints and fixes files
-```
-yarn lint
-```
+após servidor estar rodando iniciar o servidor front-end
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+        yarn serve
+
+normalmente irá entrar na URL http://localhost:8080/
+
+---
+
+## Tecnologias utilizadas
+
+VueJS - Responsável pelo front-end
+
+VueResource - para conexão com api
+
+Vuex - gerenciador de estado
+
+Bootstrap - Framework de css
+
+Vue-facebook - Componente para login com facebook
