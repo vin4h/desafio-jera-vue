@@ -27,7 +27,7 @@
               Recomendados
             </div>
             <div class="card-footer">
-              <button class="btn btn-primary">Acessar</button>
+              <button class="btn btn-primary" @click.prevent="recommended">Acessar</button>
             </div>
           </div>
           <div class="card cards">
@@ -53,7 +53,7 @@
 import { mapActions, mapState } from 'vuex'
 export default {
   methods: {
-    ...mapActions('dashboard', ['getWatched', 'getToWatch', 'findAllMovies']),
+    ...mapActions('dashboard', ['getWatched', 'getToWatch', 'findAllMovies', 'getMaxGenreId']),
     async watched () {
       await this.getWatched({ profile_id: this.profile_id })
 
@@ -68,6 +68,11 @@ export default {
       await this.findAllMovies()
 
       this.$router.push('/movies')
+    },
+    async recommended () {
+      await this.getMaxGenreId({ profile_id: this.profile_id })
+
+      this.$router.push('/recommended')
     }
   },
   computed: {

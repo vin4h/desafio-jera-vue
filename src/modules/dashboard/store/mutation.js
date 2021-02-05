@@ -9,5 +9,8 @@ export default {
   },
   [types.SET_MOVIES] (state, payload) {
     state.movies = payload
+  },
+  [types.SET_GENRE_ID] (state, payload) {
+    state.genre_id = payload
   }
 }

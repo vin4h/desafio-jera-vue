@@ -23,5 +23,10 @@ export default [
     path: '/movies',
     name: 'movies',
     component: () => import(/* webpackChunkName: 'dashboard' */ './pages/Movies')
+  },
+  {
+    path: '/recommended',
+    name: 'recommended',
+    component: () => import(/* webpackChunkName: 'dashboard' */ './pages/MovieRecommended')
   }
 ]

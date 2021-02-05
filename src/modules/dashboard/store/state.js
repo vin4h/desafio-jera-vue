@@ -11,5 +11,6 @@ export default {
     profile_id: '',
     watched: '',
     to_watch: ''
-  }
+  },
+  genre_id: ''
 }

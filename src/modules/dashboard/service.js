@@ -4,5 +4,6 @@ export default {
   watched: { method: 'post', url: 'watchedmovies/list' },
   createWatched: { method: 'post', url: 'watchedmovies' },
   toWatch: { method: 'post', url: 'watchlist/list' },
-  createToWatch: { method: 'post', url: 'watchlist' }
+  createToWatch: { method: 'post', url: 'watchlist' },
+  maxGenreId: { method: 'post', url: 'movies/maxgenre' }
 }

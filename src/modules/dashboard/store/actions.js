@@ -47,6 +47,37 @@ export const findPageMovie = async ({ commit }, context, payload) => {
     })
 }
 
+export const findPageMovieRecommended = async ({ commit }, context, payload) => {
+  console.log(context)
+  return await window._Vue.$http.get(
+    `https://api.themoviedb.org/3/discover/movie?api_key=ab49019e9117ee3ab19bb1fd5a1b332a&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${context.page}&with_genres=${context.genre_id}`)
+    .then(res => {
+      commit(types.SET_MOVIES, res.data)
+    })
+}
+
+export const findMoviesRecommended = async ({ commit }, context, payload) => {
+  return await window._Vue.$http.get(
+    `https://api.themoviedb.org/3/discover/movie?api_key=ab49019e9117ee3ab19bb1fd5a1b332a&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${context.genre_id}&query=${context.title}`)
+    .then(res => {
+      commit(types.SET_MOVIES, res.data)
+    })
+}
+
+export const getMaxGenreId = async ({ dispatch, commit }, context) => {
+  return await services.dashboard.maxGenreId(context).then(res => {
+    commit(types.SET_GENRE_ID, res.data)
+    dispatch('getGenre', res.data)
+  })
+}
+
+export const getGenre = async ({ commit }, context) => {
+  return await window._Vue.$http.get(
+    `https://api.themoviedb.org/3/discover/movie?api_key=ab49019e9117ee3ab19bb1fd5a1b332a&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${context}`).then(res => {
+    commit(types.SET_MOVIES, res.data)
+  })
+}
+
 export const findMovies = async ({ commit }, context, payload) => {
   console.log(context)
   return await window._Vue.$http.get(
