@@ -22,6 +22,40 @@ export const getWatched = ({ commit }, context, payload) => {
   })
 }
 
+export const createWatched = ({ commit }, context, payload) => {
+  return services.dashboard.createWatched(context)
+}
+
+export const createToWatch = ({ commit }, context, payload) => {
+  return services.dashboard.createToWatch(context)
+}
+
+export const findAllMovies = async ({ commit }, context, payload) => {
+  return await window._Vue.$http.get(
+    'https://api.themoviedb.org/3/discover/movie?api_key=ab49019e9117ee3ab19bb1fd5a1b332a')
+    .then(res => {
+      commit(types.SET_MOVIES, res.data)
+    })
+}
+
+export const findPageMovie = async ({ commit }, context, payload) => {
+  console.log(context)
+  return await window._Vue.$http.get(
+    `https://api.themoviedb.org/3/discover/movie?api_key=ab49019e9117ee3ab19bb1fd5a1b332a&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${context}`)
+    .then(res => {
+      commit(types.SET_MOVIES, res.data)
+    })
+}
+
+export const findMovies = async ({ commit }, context, payload) => {
+  console.log(context)
+  return await window._Vue.$http.get(
+    `https://api.themoviedb.org/3/search/movie?api_key=ab49019e9117ee3ab19bb1fd5a1b332a&language=en-US&query=${context}&page=1&include_adult=false`)
+    .then(res => {
+      commit(types.SET_MOVIES, res.data)
+    })
+}
+
 export const getToWatch = ({ commit }, context, payload) => {
   return services.dashboard.toWatch(context).then(res => {
     commit(types.SET_MOVIES, res.data)

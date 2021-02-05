@@ -10,6 +10,7 @@
     "bootstrap": "^4.6.0",
     "bootstrap-vue": "^2.21.2",
     "core-js": "^3.6.5",
+    "dotenv": "^8.2.0",
     "eslint": "^7.19.0",
     "vue": "^2.6.12",
     "vue-facebook-login-component": "^3.0.0",

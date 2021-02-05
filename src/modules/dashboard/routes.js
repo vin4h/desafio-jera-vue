@@ -18,5 +18,10 @@ export default [
     path: '/towatch',
     name: 'towatch',
     component: () => import(/* webpackChunkName: 'dashboard' */ './pages/ToWatch')
+  },
+  {
+    path: '/movies',
+    name: 'movies',
+    component: () => import(/* webpackChunkName: 'dashboard' */ './pages/Movies')
   }
 ]

@@ -36,7 +36,7 @@
               Todos os filmes
             </div>
             <div class="card-footer">
-              <button class="btn btn-primary">Acessar</button>
+                <button class="btn btn-primary" @click.prevent="allMovies">Acessar</button>
             </div>
           </div>
         </div>
@@ -53,7 +53,7 @@
 import { mapActions, mapState } from 'vuex'
 export default {
   methods: {
-    ...mapActions('dashboard', ['getWatched', 'getToWatch']),
+    ...mapActions('dashboard', ['getWatched', 'getToWatch', 'findAllMovies']),
     async watched () {
       await this.getWatched({ profile_id: this.profile_id })
 
@@ -63,6 +63,11 @@ export default {
       await this.getToWatch({ profile_id: this.profile_id })
 
       this.$router.push('/towatch')
+    },
+    async allMovies () {
+      await this.findAllMovies()
+
+      this.$router.push('/movies')
     }
   },
   computed: {
