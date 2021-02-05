@@ -15,16 +15,16 @@
           <div class="card cards">
             <div class="card-header"></div>
             <div class="card-body">
-              Recomendados
+              Filmes para assistir
             </div>
             <div class="card-footer">
-              <button class="btn btn-primary">Acessar</button>
+              <button class="btn btn-primary" @click.prevent="toWatch">Acessar</button>
             </div>
           </div>
           <div class="card cards">
             <div class="card-header"></div>
             <div class="card-body">
-              Filmes para assistir
+              Recomendados
             </div>
             <div class="card-footer">
               <button class="btn btn-primary">Acessar</button>
@@ -53,11 +53,16 @@
 import { mapActions, mapState } from 'vuex'
 export default {
   methods: {
-    ...mapActions('dashboard', ['getWatched']),
+    ...mapActions('dashboard', ['getWatched', 'getToWatch']),
     async watched () {
       await this.getWatched({ profile_id: this.profile_id })
 
       this.$router.push('/watched')
+    },
+    async toWatch () {
+      await this.getToWatch({ profile_id: this.profile_id })
+
+      this.$router.push('/towatch')
     }
   },
   computed: {

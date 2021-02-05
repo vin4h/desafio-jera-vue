@@ -1,6 +1,6 @@
 export default {
   loadSession: { method: 'post', url: 'sessions' },
+  createProfile: { method: 'post', url: 'profiles' },
   watched: { method: 'post', url: 'watchedmovies/list' },
-  createProfile: { method: 'post', url: 'profiles' }
-
+  toWatch: { method: 'post', url: 'watchlist/list' }
 }

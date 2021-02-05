@@ -18,7 +18,13 @@ export const SetSelectProfileId = ({ commit }, payload) => {
 
 export const getWatched = ({ commit }, context, payload) => {
   return services.dashboard.watched(context).then(res => {
-    commit(types.SET_WATCHED, res.data)
+    commit(types.SET_MOVIES, res.data)
+  })
+}
+
+export const getToWatch = ({ commit }, context, payload) => {
+  return services.dashboard.toWatch(context).then(res => {
+    commit(types.SET_MOVIES, res.data)
   })
 }
 

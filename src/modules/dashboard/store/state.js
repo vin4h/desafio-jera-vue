@@ -3,6 +3,13 @@ export default {
 
   },
   profile_id: '',
-  watched: [],
-  watchList: []
+  movies: {
+    id: '',
+    title: '',
+    genre: '',
+    genre_id: '',
+    profile_id: '',
+    watched: '',
+    to_watch: ''
+  }
 }
