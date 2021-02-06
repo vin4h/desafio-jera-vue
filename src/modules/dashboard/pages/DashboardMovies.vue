@@ -9,7 +9,7 @@
               Filmes Assistidos
             </div>
                 <div class="card-footer">
-                  <button class="btn btn-primary" @click.prevent="watched">Acessar</button>
+                  <button class="btn btn-primary" @click.prevent="toWatch">Acessar</button>
               </div>
           </div>
           <div class="card cards">
@@ -18,7 +18,7 @@
               Filmes para assistir
             </div>
             <div class="card-footer">
-              <button class="btn btn-primary" @click.prevent="toWatch">Acessar</button>
+              <button class="btn btn-primary" @click.prevent="watched">Acessar</button>
             </div>
           </div>
           <div class="card cards">
